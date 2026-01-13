@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Android Testing tools</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">Android Testing tools</string>
+    <string name="home_subtitle">Choose an option:</string>
+    <string name="btn_package_checker">GPAP Checker</string>
+    <string name="btn_apps_screen">Apps Checker</string>
+    
+    <!-- Main Activity -->
+    <string name="main_title">GPAP Checker</string>
+    <string name="btn_check_packages">Check Packages</string>
+    <string name="btn_export">Export</string>
+    
+    <!-- Apps Activity -->
+    <string name="apps_title">Apps Checker</string>
+    <string name="apps_description">Compare package lists from different APIs</string>
+    <string name="apps_description_extended">Compare package lists from getInstalledPackages and getInstalledApplications APIs.</string>
+    <string name="apps_future_features">Future app features will be implemented here.</string>
+    <string name="btn_compare_packages">Compare Package APIs</string>
+    <string name="packages_api_title">getInstalledPackages()</string>
+    <string name="applications_api_title">getInstalledApplications()</string>
+    <string name="differences_title">Differences</string>
+    <string name="only_in_packages">Only in Packages API (%1$d)</string>
+    <string name="only_in_applications">Only in Applications API (%1$d)</string>
+    <string name="common_packages">Common packages: %1$d</string>
+    <string name="loading_packages">Loading packages...</string>
+    <string name="error_loading_packages">Error loading packages: %1$s</string>
+    
+    <!-- Error Messages -->
+    <string name="error_checking_packages">Error checking packages: %1$s</string>
+    
+    <!-- Factory Messages -->
+    <string name="unknown_viewmodel_class">Unknown ViewModel class</string>
+</resources>
