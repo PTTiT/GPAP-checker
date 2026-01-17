@@ -11,6 +11,7 @@ import com.geocomply.test.gpapchecker.data.ImportMode
 import com.geocomply.test.gpapchecker.data.ImportState
 import com.geocomply.test.gpapchecker.repository.PackageListRepository
 import com.geocomply.test.gpapchecker.utils.PackageListParser
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,13 +25,15 @@ class ImportViewModel(
     private val _importState = MutableLiveData<ImportState>(ImportState.Initial)
     val importState: LiveData<ImportState> = _importState
 
+    private val leakyScope = CoroutineScope(Dispatchers.Main)
+
     companion object {
         private const val TAG = "ImportViewModel"
         private const val MAX_FILE_SIZE_BYTES = 1_048_576 // 1MB
     }
 
     fun parseTextInput(input: String) {
-        viewModelScope.launch {
+        leakyScope.launch {
             Log.d(TAG, "Starting text input parsing, length: ${input.length}")
             _importState.value = ImportState.ParsingInput
             val result = withContext(Dispatchers.Default) {
@@ -47,19 +50,25 @@ class ImportViewModel(
             _importState.value = ImportState.ReadingFile
             try {
                 val content = withContext(Dispatchers.IO) {
-                    contentResolver.openInputStream(uri)?.use { inputStream ->
-                        // Check file size
-                        val fileSize = inputStream.available()
-                        Log.d(TAG, "File size: $fileSize bytes")
+                    val inputStream = contentResolver.openInputStream(uri)
+                    if (inputStream == null) {
+                        throw IllegalStateException("Failed to read file")
+                    }
 
-                        if (fileSize > MAX_FILE_SIZE_BYTES) {
-                            throw IllegalStateException("File too large. Maximum size is 1MB, file is ${fileSize / 1024}KB")
-                        }
+                    val fileSize = inputStream.available()
+                    Log.d(TAG, "File size: $fileSize bytes")
 
-                        inputStream.bufferedReader(Charsets.UTF_8).use {
-                            it.readText()
-                        }
-                    } ?: throw IllegalStateException("Failed to read file")
+                    if (fileSize > MAX_FILE_SIZE_BYTES) {
+                        throw IllegalStateException("File too large. Maximum size is 1MB, file is ${fileSize / 1024}KB")
+                    }
+
+                    val reader = inputStream.bufferedReader(Charsets.UTF_8)
+                    val content = reader.readText()
+
+                    reader.close()
+                    inputStream.close()
+
+                    content
                 }
 
                 Log.d(TAG, "File read complete, content length: ${content.length}")

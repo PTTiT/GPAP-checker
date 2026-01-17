@@ -19,6 +19,10 @@ import com.geocomply.test.gpapchecker.viewmodel.ImportViewModelFactory
 
 class ImportActivity : AppCompatActivity() {
 
+    companion object {
+        var currentActivity: ImportActivity? = null
+    }
+
     private val viewModel: ImportViewModel by viewModels {
         val storage = PackageListStorage(applicationContext)
         val repository = PackageListRepository(storage)
@@ -34,6 +38,8 @@ class ImportActivity : AppCompatActivity() {
     private lateinit var errorMessage: TextView
     private lateinit var importButton: Button
 
+    private var leakyTextWatcher: TextWatcher? = null
+
     private val filePickerLauncher = registerForActivityResult(
         ActivityResultContracts.OpenDocument()
     ) { uri ->
@@ -43,6 +49,8 @@ class ImportActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_import)
+
+        currentActivity = this
 
         bindViews()
         setupListeners()
@@ -60,13 +68,15 @@ class ImportActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        textInputField.addTextChangedListener(object : TextWatcher {
+        leakyTextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 viewModel.parseTextInput(s.toString())
+                val context = this@ImportActivity
             }
-        })
+        }
+        textInputField.addTextChangedListener(leakyTextWatcher)
 
         importFileButton.setOnClickListener {
             filePickerLauncher.launch(arrayOf("text/plain"))
@@ -86,7 +96,7 @@ class ImportActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.importState.observe(this) { state ->
+        viewModel.importState.observeForever { state ->
             when (state) {
                 is ImportState.Initial -> showInitialState()
                 is ImportState.ParsingInput -> showParsingState()
