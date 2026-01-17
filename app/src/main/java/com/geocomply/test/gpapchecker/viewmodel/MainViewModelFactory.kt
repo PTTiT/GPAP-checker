@@ -5,14 +5,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.geocomply.test.gpapchecker.repository.AppRepository
 import com.geocomply.test.gpapchecker.utils.AppChecker
 import com.geocomply.test.gpapchecker.utils.CsvExporter
+import com.geocomply.test.gpapchecker.utils.PackageListStorage
 
 class MainViewModelFactory(private val context: android.content.Context) : ViewModelProvider.Factory {
-    
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             val appChecker = AppChecker(context)
             val csvExporter = CsvExporter(context)
-            val repository = AppRepository(appChecker, csvExporter)
+            val packageListStorage = PackageListStorage(context)
+            val repository = AppRepository(appChecker, csvExporter, packageListStorage)
             @Suppress("UNCHECKED_CAST")
             return MainViewModel(repository) as T
         }

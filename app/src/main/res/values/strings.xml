@@ -32,4 +32,17 @@
     
     <!-- Factory Messages -->
     <string name="unknown_viewmodel_class">Unknown ViewModel class</string>
+
+    <!-- Import Activity -->
+    <string name="import_title">Import Package List</string>
+    <string name="import_text_label">Enter package names (comma or line separated):</string>
+    <string name="import_text_hint">com.example.app1, com.example.app2...</string>
+    <string name="import_or">OR</string>
+    <string name="import_file_button">Import from .txt File</string>
+    <string name="import_mode_label">Import mode:</string>
+    <string name="import_mode_replace">Replace existing list (recommended)</string>
+    <string name="import_mode_append">Append to existing list</string>
+    <string name="import_button">Import</string>
+    <string name="validation_summary">%1$d valid, %2$d invalid packages</string>
+    <string name="action_settings">Import List</string>
 </resources>

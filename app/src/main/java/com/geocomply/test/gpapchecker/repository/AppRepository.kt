@@ -3,10 +3,12 @@ package com.geocomply.test.gpapchecker.repository
 import com.geocomply.test.gpapchecker.data.AppInfo
 import com.geocomply.test.gpapchecker.utils.AppChecker
 import com.geocomply.test.gpapchecker.utils.CsvExporter
+import com.geocomply.test.gpapchecker.utils.PackageListStorage
 
 class AppRepository(
     private val appChecker: AppChecker,
-    private val csvExporter: CsvExporter
+    private val csvExporter: CsvExporter,
+    private val packageListStorage: PackageListStorage
 ) {
     
     private val packageNamesToCheck = listOf(
@@ -214,12 +216,19 @@ class AppRepository(
     )
     
     suspend fun checkPackages(): List<AppInfo> {
-        return appChecker.checkPackages(packageNamesToCheck)
+        val packagesToCheck = getPackageNamesToCheck()
+        return appChecker.checkPackages(packagesToCheck)
     }
-    
+
     fun exportToCsv(appInfoList: List<AppInfo>) {
         csvExporter.exportAndEmail(appInfoList)
     }
-    
-    fun getPackageNamesToCheck(): List<String> = packageNamesToCheck
+
+    fun getPackageNamesToCheck(): List<String> {
+        return if (packageListStorage.hasCustomList()) {
+            packageListStorage.getPackageList()
+        } else {
+            packageNamesToCheck  // First launch: use hardcoded list
+        }
+    }
 }

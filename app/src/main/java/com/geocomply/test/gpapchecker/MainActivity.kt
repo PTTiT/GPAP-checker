@@ -1,12 +1,16 @@
 package com.geocomply.test.gpapchecker
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,14 +29,46 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
+
         // Initialize ViewModel
         val factory = MainViewModelFactory(this)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
-        
+
+        setupToolbar()
         setupViews()
         setupObservers()
         setupButtons()
+    }
+
+    private fun setupToolbar() {
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh the app list when returning from ImportActivity
+        // This ensures the UI reflects any changes made to the package list
+        val currentState = viewModel.uiState.value
+        if (currentState is UiState.Success && currentState.data.isNotEmpty()) {
+            // Re-check packages if we previously had results
+            viewModel.checkPackages()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                startActivity(Intent(this, ImportActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
     
     private fun setupViews() {
