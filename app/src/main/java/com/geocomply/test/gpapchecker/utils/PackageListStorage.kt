@@ -35,12 +35,9 @@ class PackageListStorage(context: Context) {
 
     fun savePackageList(packages: List<String>) {
         val json = Json.encodeToString(packages)
-        prefs.edit().apply {
-            putString(KEY_CUSTOM_PACKAGES, json)
-            putBoolean(KEY_IS_CUSTOM_LIST, true)
-            putLong(KEY_LAST_IMPORT_TIME, System.currentTimeMillis())
-            apply()
-        }
+        prefs.edit().putString(KEY_CUSTOM_PACKAGES, json).apply()
+        prefs.edit().putBoolean(KEY_IS_CUSTOM_LIST, true).apply()
+        prefs.edit().putLong(KEY_LAST_IMPORT_TIME, System.currentTimeMillis()).apply()
     }
 
     fun clearCustomList() {

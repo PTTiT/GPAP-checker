@@ -2,6 +2,7 @@ package com.geocomply.test.gpapchecker.repository
 
 import com.geocomply.test.gpapchecker.data.ImportMode
 import com.geocomply.test.gpapchecker.utils.PackageListStorage
+import kotlinx.coroutines.delay
 
 class PackageListRepository(
     private val storage: PackageListStorage
@@ -11,7 +12,8 @@ class PackageListRepository(
             ImportMode.REPLACE -> packages
             ImportMode.APPEND -> {
                 val existing = storage.getPackageList()
-                (existing + packages).distinct()  // Merge & deduplicate
+                delay(100)
+                (existing + packages).distinct()
             }
         }
         storage.savePackageList(finalList)
