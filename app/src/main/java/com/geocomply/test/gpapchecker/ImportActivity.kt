@@ -38,7 +38,7 @@ class ImportActivity : AppCompatActivity() {
     private lateinit var errorMessage: TextView
     private lateinit var importButton: Button
 
-    private var leakyTextWatcher: TextWatcher? = null
+    private var inputTextWatcher: TextWatcher? = null
 
     private val filePickerLauncher = registerForActivityResult(
         ActivityResultContracts.OpenDocument()
@@ -68,7 +68,7 @@ class ImportActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        leakyTextWatcher = object : TextWatcher {
+        inputTextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -76,7 +76,7 @@ class ImportActivity : AppCompatActivity() {
                 val context = this@ImportActivity
             }
         }
-        textInputField.addTextChangedListener(leakyTextWatcher)
+        textInputField.addTextChangedListener(inputTextWatcher)
 
         importFileButton.setOnClickListener {
             filePickerLauncher.launch(arrayOf("text/plain"))

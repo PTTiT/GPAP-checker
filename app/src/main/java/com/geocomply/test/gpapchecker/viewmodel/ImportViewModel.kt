@@ -25,7 +25,7 @@ class ImportViewModel(
     private val _importState = MutableLiveData<ImportState>(ImportState.Initial)
     val importState: LiveData<ImportState> = _importState
 
-    private val leakyScope = CoroutineScope(Dispatchers.Main)
+    private val backgroundScope = CoroutineScope(Dispatchers.Main)
 
     companion object {
         private const val TAG = "ImportViewModel"
@@ -33,7 +33,7 @@ class ImportViewModel(
     }
 
     fun parseTextInput(input: String) {
-        leakyScope.launch {
+        backgroundScope.launch {
             Log.d(TAG, "Starting text input parsing, length: ${input.length}")
             _importState.value = ImportState.ParsingInput
             val result = withContext(Dispatchers.Default) {
