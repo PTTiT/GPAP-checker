@@ -84,13 +84,13 @@
 
 ### Implementation for User Story 2
 
-- [ ] T024 [US2] Add file picker button click handler in ImportActivity
-- [ ] T025 [US2] Register ActivityResultLauncher for file selection in ImportActivity
-- [ ] T026 [US2] Implement parseFileContent() method in ImportViewModel using Storage Access Framework
-- [ ] T027 [US2] Add file read logic with UTF-8 encoding in ImportViewModel
-- [ ] T028 [US2] Add error handling for file read failures in ImportViewModel
-- [ ] T029 [US2] Wire file selection result to ViewModel in ImportActivity
-- [ ] T030 [US2] Update UI state handling for ReadingFile state in ImportActivity
+- [X] T024 [US2] Add file picker button click handler in ImportActivity
+- [X] T025 [US2] Register ActivityResultLauncher for file selection in ImportActivity
+- [X] T026 [US2] Implement parseFileContent() method in ImportViewModel using Storage Access Framework
+- [X] T027 [US2] Add file read logic with UTF-8 encoding in ImportViewModel
+- [X] T028 [US2] Add error handling for file read failures in ImportActivity
+- [X] T029 [US2] Wire file selection result to ViewModel in ImportActivity
+- [X] T030 [US2] Update UI state handling for ReadingFile state in ImportActivity
 
 **Checkpoint**: User Stories 1 AND 2 both work independently - text input and file import both functional
 
