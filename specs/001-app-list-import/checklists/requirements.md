@@ -35,7 +35,12 @@
 
 All clarifications have been addressed:
 
-1. **FR-011**: Default import mode - **Replace** (user can opt-in to append)
-2. **FR-017**: CSV header detection - **Validate first row** and skip if it doesn't match package name format
+1. **FR-009**: Default import mode - **Replace** (user can opt-in to append)
+
+### Scope Changes
+
+**2026-01-17**: Removed CSV file support to simplify implementation. Feature now supports only:
+- Text input (comma-separated)
+- .txt file import
 
 The specification is now complete and ready for the next phase (`/speckit.clarify` or `/speckit.plan`).

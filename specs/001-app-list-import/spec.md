@@ -5,7 +5,7 @@
 **Status**: Draft
 **Input**: User description: "Add a feature for user to import the list of the apps to check. The import feature supports multiple ways:
 - A string of package names separated by commas
-- File: txt, csv
+- File: txt
 
 User can click on the setting button in the top bar of main screen to navigate to the import screen.
 After user imports correctly, it backs to the main screen. The main screen is refreshed with the updated app list.
@@ -47,23 +47,7 @@ A user has a prepared text file containing package names (one per line or comma-
 
 ---
 
-### User Story 3 - Import App List from CSV File (Priority: P3)
-
-A user has a CSV file (potentially exported from a spreadsheet or database) containing package names. They navigate to the import screen, select a .csv file, and import it. The app parses the CSV (using the first column or a specified column for package names), validates the data, and updates the main screen.
-
-**Why this priority**: CSV files offer structured data import and are common in enterprise/data-driven workflows. While valuable, this is lower priority since text files and manual input cover most use cases.
-
-**Independent Test**: Can be fully tested by creating a CSV file with package names in the first column, selecting it via the file picker, and verifying that all packages appear in the main screen's app list.
-
-**Acceptance Scenarios**:
-
-1. **Given** user is on the import screen, **When** user taps "Import from File" and selects a .csv file with package names in the first column, **Then** the app reads the file, parses package names from the first column, and navigates back to the main screen with the imported packages displayed
-2. **Given** the CSV file contains multiple columns, **When** user imports the file, **Then** the app uses the first column for package names and ignores other columns
-3. **Given** user has imported packages from a CSV file, **When** user relaunches the app, **Then** the imported packages persist in the app list
-
----
-
-### User Story 4 - Replace Existing App List with New Import (Priority: P2)
+### User Story 3 - Replace Existing App List with New Import (Priority: P2)
 
 A user wants to replace the current app list entirely with a new import (either text input or file). They navigate to the import screen, select the "Replace existing list" option, and proceed with the import. The app clears the current list and replaces it with the newly imported packages.
 
@@ -87,7 +71,6 @@ A user wants to replace the current app list entirely with a new import (either 
 - What happens when user cancels file selection?
 - What happens when file read fails (permissions, corrupted file)?
 - What happens when imported packages contain whitespace (leading/trailing)?
-- What happens when CSV file has headers?
 - What happens when user navigates away from import screen without importing?
 - What happens when the same package name is imported multiple times?
 
@@ -98,26 +81,23 @@ A user wants to replace the current app list entirely with a new import (either 
 - **FR-001**: System MUST provide a settings button in the top bar of the main screen that navigates to the import screen
 - **FR-002**: System MUST allow users to input package names as a comma-separated string in a text field
 - **FR-003**: System MUST allow users to select and import package names from a .txt file
-- **FR-004**: System MUST allow users to select and import package names from a .csv file
-- **FR-005**: System MUST parse comma-separated package names from text input
-- **FR-006**: System MUST parse package names from .txt files that contain either comma-separated values or one package name per line
-- **FR-007**: System MUST parse package names from .csv files by extracting values from the first column
-- **FR-008**: System MUST validate package names to ensure they follow valid Android package naming conventions (lowercase letters, dots, numbers, underscores)
-- **FR-009**: System MUST trim leading and trailing whitespace from package names during import
-- **FR-010**: System MUST remove duplicate package names within a single import operation
-- **FR-011**: System MUST provide an option to replace the existing app list or append to it, with replace as the default behavior
-- **FR-012**: System MUST persist the imported app list to storage so it is retained across app launches
-- **FR-013**: System MUST navigate back to the main screen after successful import
-- **FR-014**: System MUST refresh the main screen to display the updated app list after import
-- **FR-015**: System MUST display an error message if no valid package names are found in the import
-- **FR-016**: System MUST display an error message if file selection fails or file cannot be read
-- **FR-017**: System MUST validate the first row of CSV files and skip it if it doesn't match valid package name format (treating it as a header)
+- **FR-004**: System MUST parse comma-separated package names from text input
+- **FR-005**: System MUST parse package names from .txt files that contain either comma-separated values or one package name per line
+- **FR-006**: System MUST validate package names to ensure they follow valid Android package naming conventions (lowercase letters, dots, numbers, underscores)
+- **FR-007**: System MUST trim leading and trailing whitespace from package names during import
+- **FR-008**: System MUST remove duplicate package names within a single import operation
+- **FR-009**: System MUST provide an option to replace the existing app list or append to it, with replace as the default behavior
+- **FR-010**: System MUST persist the imported app list to storage so it is retained across app launches
+- **FR-011**: System MUST navigate back to the main screen after successful import
+- **FR-012**: System MUST refresh the main screen to display the updated app list after import
+- **FR-013**: System MUST display an error message if no valid package names are found in the import
+- **FR-014**: System MUST display an error message if file selection fails or file cannot be read
 
 ### Key Entities
 
 - **Package Name**: A string representing an Android application package identifier (e.g., "com.example.app"), which follows Android package naming conventions
 - **App List**: A collection of package names that the system will check for installation and license activity presence
-- **Import Source**: The origin of package names, which can be text input, .txt file, or .csv file
+- **Import Source**: The origin of package names, which can be text input or .txt file
 
 ## Success Criteria *(mandatory)*
 
@@ -134,10 +114,9 @@ A user wants to replace the current app list entirely with a new import (either 
 ## Assumptions
 
 1. **File Format Parsing**: For .txt files, package names can be separated by commas, newlines, or both. The parser will handle all common text file formats.
-2. **CSV Structure**: CSV files will use the first column for package names, with the first row optionally containing a header that will be automatically detected and skipped if it doesn't match package name format.
-3. **Default Import Mode**: The default behavior will be to replace the existing app list with the imported packages, unless the user explicitly selects "Append to existing list" option.
-4. **Package Name Validation**: Only basic format validation will be performed (valid characters, dot-separated structure). The system will not verify if packages actually exist on the device during import.
-5. **Duplicate Handling**: If the same package name appears multiple times in the import source, only one instance will be added. If a package name already exists in the current list and append mode is used, the duplicate will be ignored.
-6. **File Size Limits**: Files up to 1MB will be supported for import, which accommodates tens of thousands of package names.
-7. **Storage Mechanism**: Imported package names will be stored using Android SharedPreferences or a local database, replacing the hardcoded list in AppRepository.
-8. **Navigation**: The back button on the import screen will return to the main screen without importing (cancel behavior).
+2. **Default Import Mode**: The default behavior will be to replace the existing app list with the imported packages, unless the user explicitly selects "Append to existing list" option.
+3. **Package Name Validation**: Only basic format validation will be performed (valid characters, dot-separated structure). The system will not verify if packages actually exist on the device during import.
+4. **Duplicate Handling**: If the same package name appears multiple times in the import source, only one instance will be added. If a package name already exists in the current list and append mode is used, the duplicate will be ignored.
+5. **File Size Limits**: Text files up to 1MB will be supported for import, which accommodates tens of thousands of package names.
+6. **Storage Mechanism**: Imported package names will be stored using Android SharedPreferences or a local database, replacing the hardcoded list in AppRepository.
+7. **Navigation**: The back button on the import screen will return to the main screen without importing (cancel behavior).
