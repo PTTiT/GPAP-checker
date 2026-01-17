@@ -104,13 +104,13 @@
 
 ### Implementation for User Story 3
 
-- [ ] T031 [US3] Add RadioGroup for import mode selection (Replace/Append) to activity_import.xml
-- [ ] T032 [US3] Add import mode strings to strings.xml
-- [ ] T033 [US3] Implement import mode selection reading in ImportActivity
-- [ ] T034 [US3] Pass ImportMode to performImport() in ImportActivity
-- [ ] T035 [US3] Implement REPLACE mode logic in PackageListRepository.savePackages()
-- [ ] T036 [US3] Implement APPEND mode logic with deduplication in PackageListRepository.savePackages()
-- [ ] T037 [US3] Set default radio button to "Replace" in activity_import.xml
+- [X] T031 [US3] Add RadioGroup for import mode selection (Replace/Append) to activity_import.xml
+- [X] T032 [US3] Add import mode strings to strings.xml
+- [X] T033 [US3] Implement import mode selection reading in ImportActivity
+- [X] T034 [US3] Pass ImportMode to performImport() in ImportActivity
+- [X] T035 [US3] Implement REPLACE mode logic in PackageListRepository.savePackages()
+- [X] T036 [US3] Implement APPEND mode logic with deduplication in PackageListRepository.savePackages()
+- [X] T037 [US3] Set default radio button to "Replace" in activity_import.xml
 
 **Checkpoint**: All user stories independently functional - text input, file import, and replace/append modes all work
 
@@ -120,19 +120,19 @@
 
 **Purpose**: Improvements that affect multiple user stories and edge case handling
 
-- [ ] T038 [P] Add empty input validation (disable import button when no valid packages) in ImportActivity
-- [ ] T039 [P] Add error message display for file read failures in ImportActivity
-- [ ] T040 [P] Add success toast message showing package count after import in ImportActivity
-- [ ] T041 [P] Add progress indicators for ParsingInput and ReadingFile states in ImportActivity
-- [ ] T042 Verify whitespace trimming works correctly in PackageListParser.parse()
-- [ ] T043 Verify duplicate removal (distinct()) works correctly in PackageListParser.parse()
-- [ ] T044 Verify package name validation regex rejects invalid formats in PackageListParser
-- [ ] T045 Update MainActivity (GPAP Checker screen) to refresh app list when returning from ImportActivity
-- [ ] T046 [P] Add file size validation (max 1MB) in ImportViewModel.parseFileContent()
-- [ ] T047 [P] Add logging for import operations in ImportViewModel
-- [ ] T048 Verify first launch detection (hardcoded list shown) in AppRepository
-- [ ] T049 Run quickstart.md manual validation scenarios
-- [ ] T050 Build and test on physical device or emulator
+- [X] T038 [P] Add empty input validation (disable import button when no valid packages) in ImportActivity
+- [X] T039 [P] Add error message display for file read failures in ImportActivity
+- [X] T040 [P] Add success toast message showing package count after import in ImportActivity
+- [X] T041 [P] Add progress indicators for ParsingInput and ReadingFile states in ImportActivity
+- [X] T042 Verify whitespace trimming works correctly in PackageListParser.parse()
+- [X] T043 Verify duplicate removal (distinct()) works correctly in PackageListParser.parse()
+- [X] T044 Verify package name validation regex rejects invalid formats in PackageListParser
+- [X] T045 Update MainActivity (GPAP Checker screen) to refresh app list when returning from ImportActivity
+- [X] T046 [P] Add file size validation (max 1MB) in ImportViewModel.parseFileContent()
+- [X] T047 [P] Add logging for import operations in ImportViewModel
+- [X] T048 Verify first launch detection (hardcoded list shown) in AppRepository
+- [X] T049 Run quickstart.md manual validation scenarios
+- [X] T050 Build and test on physical device or emulator
 
 ---
 

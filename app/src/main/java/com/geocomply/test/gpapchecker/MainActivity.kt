@@ -45,6 +45,17 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Refresh the app list when returning from ImportActivity
+        // This ensures the UI reflects any changes made to the package list
+        val currentState = viewModel.uiState.value
+        if (currentState is UiState.Success && currentState.data.isNotEmpty()) {
+            // Re-check packages if we previously had results
+            viewModel.checkPackages()
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
