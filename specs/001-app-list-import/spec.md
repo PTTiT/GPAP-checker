@@ -66,9 +66,9 @@ A user wants to replace the current app list entirely with a new import (either 
 
 - **Empty input/file**: Import button remains disabled until valid input provided (FR-015, FR-016)
 - **Invalid package formats**: Show inline validation with count, import only valid packages (FR-013, FR-014)
-- **Duplicate package names**: Automatically removed during import (FR-008, Assumption 4)
+- **Duplicate package names**: Automatically removed during import (FR-009, Assumption 4)
 - **File selection cancelled**: Return to import screen without changes
-- **File read failure**: Display error message describing the failure (FR-016)
+- **File read failure**: Display error message describing the failure (FR-018)
 - **Whitespace in packages**: Automatically trimmed during parsing (FR-007)
 - **Navigate away without importing**: Changes discarded, return to main screen with original list (Assumption 7)
 - **Same package imported multiple times**: Deduplicated to single instance (Assumption 4)
@@ -83,7 +83,7 @@ A user wants to replace the current app list entirely with a new import (either 
 - **FR-004**: System MUST allow users to select and import package names from a UTF-8 encoded .txt file
 - **FR-005**: System MUST parse comma-separated package names from text input
 - **FR-006**: System MUST parse package names from .txt files that contain either comma-separated values or one package name per line
-- **FR-007**: System MUST validate package names to ensure they follow valid Android package naming conventions (lowercase letters, dots, numbers, underscores)
+- **FR-007**: System MUST validate package names to ensure they follow valid Android package naming conventions using regex pattern `^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$` (lowercase letters, dots, numbers, underscores; must have at least two dot-separated segments)
 - **FR-008**: System MUST trim leading and trailing whitespace from package names during import
 - **FR-009**: System MUST remove duplicate package names within a single import operation
 - **FR-010**: System MUST provide an option to replace the existing app list or append to it, with replace as the default behavior

@@ -40,7 +40,7 @@
 - [ ] T003 [P] Create ValidationResult data class in app/src/main/java/com/geocomply/test/gpapchecker/data/ValidationResult.kt
 - [ ] T004 [P] Create ImportState sealed class in app/src/main/java/com/geocomply/test/gpapchecker/data/ImportState.kt
 - [ ] T005 [P] Create ImportMode enum in app/src/main/java/com/geocomply/test/gpapchecker/data/ImportState.kt
-- [ ] T006 [P] Implement PackageListParser utility in app/src/main/java/com/geocomply/test/gpapchecker/utils/PackageListParser.kt
+- [ ] T006 [P] Implement PackageListParser utility with validation regex, whitespace trimming, and deduplication in app/src/main/java/com/geocomply/test/gpapchecker/utils/PackageListParser.kt
 - [ ] T007 [P] Implement PackageListStorage utility in app/src/main/java/com/geocomply/test/gpapchecker/utils/PackageListStorage.kt
 - [ ] T008 Implement PackageListRepository in app/src/main/java/com/geocomply/test/gpapchecker/repository/PackageListRepository.kt
 - [ ] T009 Modify AppRepository to integrate PackageListStorage in app/src/main/java/com/geocomply/test/gpapchecker/repository/AppRepository.kt
@@ -124,9 +124,9 @@
 - [ ] T039 [P] Add error message display for file read failures in ImportActivity
 - [ ] T040 [P] Add success toast message showing package count after import in ImportActivity
 - [ ] T041 [P] Add progress indicators for ParsingInput and ReadingFile states in ImportActivity
-- [ ] T042 Add whitespace trimming in PackageListParser.parse()
-- [ ] T043 Add duplicate removal (distinct()) in PackageListParser.parse()
-- [ ] T044 Add package name validation regex in PackageListParser
+- [ ] T042 Verify whitespace trimming works correctly in PackageListParser.parse()
+- [ ] T043 Verify duplicate removal (distinct()) works correctly in PackageListParser.parse()
+- [ ] T044 Verify package name validation regex rejects invalid formats in PackageListParser
 - [ ] T045 Update MainActivity to refresh app list when returning from ImportActivity
 - [ ] T046 [P] Add file size validation (max 1MB) in ImportViewModel.parseFileContent()
 - [ ] T047 [P] Add logging for import operations in ImportViewModel
