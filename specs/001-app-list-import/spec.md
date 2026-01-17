@@ -64,34 +64,37 @@ A user wants to replace the current app list entirely with a new import (either 
 
 ### Edge Cases
 
-- What happens when user inputs an empty string or file?
-- What happens when file contains invalid package name formats (e.g., spaces, special characters)?
-- What happens when file is empty?
-- What happens when file contains duplicate package names?
-- What happens when user cancels file selection?
-- What happens when file read fails (permissions, corrupted file)?
-- What happens when imported packages contain whitespace (leading/trailing)?
-- What happens when user navigates away from import screen without importing?
-- What happens when the same package name is imported multiple times?
+- **Empty input/file**: Import button remains disabled until valid input provided (FR-015, FR-016)
+- **Invalid package formats**: Show inline validation with count, import only valid packages (FR-013, FR-014)
+- **Duplicate package names**: Automatically removed during import (FR-008, Assumption 4)
+- **File selection cancelled**: Return to import screen without changes
+- **File read failure**: Display error message describing the failure (FR-016)
+- **Whitespace in packages**: Automatically trimmed during parsing (FR-007)
+- **Navigate away without importing**: Changes discarded, return to main screen with original list (Assumption 7)
+- **Same package imported multiple times**: Deduplicated to single instance (Assumption 4)
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 
 - **FR-001**: System MUST provide a settings button in the top bar of the main screen that navigates to the import screen
-- **FR-002**: System MUST allow users to input package names as a comma-separated string in a text field
-- **FR-003**: System MUST allow users to select and import package names from a .txt file
-- **FR-004**: System MUST parse comma-separated package names from text input
-- **FR-005**: System MUST parse package names from .txt files that contain either comma-separated values or one package name per line
-- **FR-006**: System MUST validate package names to ensure they follow valid Android package naming conventions (lowercase letters, dots, numbers, underscores)
-- **FR-007**: System MUST trim leading and trailing whitespace from package names during import
-- **FR-008**: System MUST remove duplicate package names within a single import operation
-- **FR-009**: System MUST provide an option to replace the existing app list or append to it, with replace as the default behavior
-- **FR-010**: System MUST persist the imported app list to storage so it is retained across app launches
-- **FR-011**: System MUST navigate back to the main screen after successful import
-- **FR-012**: System MUST refresh the main screen to display the updated app list after import
-- **FR-013**: System MUST display an error message if no valid package names are found in the import
-- **FR-014**: System MUST display an error message if file selection fails or file cannot be read
+- **FR-002**: System MUST display the original hardcoded 213-package list on first app launch before any import occurs
+- **FR-003**: System MUST allow users to input package names as a comma-separated string in a text field
+- **FR-004**: System MUST allow users to select and import package names from a UTF-8 encoded .txt file
+- **FR-005**: System MUST parse comma-separated package names from text input
+- **FR-006**: System MUST parse package names from .txt files that contain either comma-separated values or one package name per line
+- **FR-007**: System MUST validate package names to ensure they follow valid Android package naming conventions (lowercase letters, dots, numbers, underscores)
+- **FR-008**: System MUST trim leading and trailing whitespace from package names during import
+- **FR-009**: System MUST remove duplicate package names within a single import operation
+- **FR-010**: System MUST provide an option to replace the existing app list or append to it, with replace as the default behavior
+- **FR-011**: System MUST persist the imported app list to storage so it is retained across app launches, completely replacing the hardcoded package list
+- **FR-012**: System MUST navigate back to the main screen after successful import
+- **FR-013**: System MUST refresh the main screen to display the updated app list after import
+- **FR-014**: System MUST display inline validation showing the count of valid and invalid package names when processing imports
+- **FR-015**: System MUST import only valid package names and skip invalid ones, displaying which packages were rejected
+- **FR-016**: System MUST disable the import button when no valid package names are present in the input
+- **FR-017**: System MUST enable the import button only when at least one valid package name is detected
+- **FR-018**: System MUST display an error message if file selection fails or file cannot be read
 
 ### Key Entities
 
@@ -111,12 +114,22 @@ A user wants to replace the current app list entirely with a new import (either 
 - **SC-006**: 95% of valid package name formats are correctly parsed and imported without errors
 - **SC-007**: Users receive clear feedback within 2 seconds for invalid input or file errors
 
+## Clarifications
+
+### Session 2026-01-17
+
+- Q: How should the system handle invalid package names during import? → A: Show inline validation with count of valid/invalid packages, import only valid ones
+- Q: What should happen if user attempts to submit empty input or file? → A: Prevent submission until at least one valid package name is provided (disable import button)
+- Q: How should imported packages interact with the existing hardcoded 213-package list? → A: Imported list replaces hardcoded list entirely (user takes full control)
+- Q: What should the app display on first launch before any import? → A: Show the original 213 hardcoded packages on first launch (until user imports custom list)
+- Q: What file encoding should be supported for .txt file imports? → A: UTF-8 only (Android standard, covers all valid package name characters)
+
 ## Assumptions
 
-1. **File Format Parsing**: For .txt files, package names can be separated by commas, newlines, or both. The parser will handle all common text file formats.
+1. **File Format Parsing**: For .txt files, package names can be separated by commas, newlines, or both. The parser will handle all common text file formats. Files must be UTF-8 encoded.
 2. **Default Import Mode**: The default behavior will be to replace the existing app list with the imported packages, unless the user explicitly selects "Append to existing list" option.
 3. **Package Name Validation**: Only basic format validation will be performed (valid characters, dot-separated structure). The system will not verify if packages actually exist on the device during import.
 4. **Duplicate Handling**: If the same package name appears multiple times in the import source, only one instance will be added. If a package name already exists in the current list and append mode is used, the duplicate will be ignored.
 5. **File Size Limits**: Text files up to 1MB will be supported for import, which accommodates tens of thousands of package names.
-6. **Storage Mechanism**: Imported package names will be stored using Android SharedPreferences or a local database, replacing the hardcoded list in AppRepository.
+6. **Storage Mechanism**: Imported package names will be stored persistently and will completely replace the hardcoded 213-package list in AppRepository. On first launch (before any import), the app uses the original hardcoded list. Once a user imports a custom list, the hardcoded list is no longer used.
 7. **Navigation**: The back button on the import screen will return to the main screen without importing (cancel behavior).
