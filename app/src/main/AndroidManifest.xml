@@ -43,7 +43,13 @@
             android:exported="false"
             android:label="Apps Screen"
             android:theme="@style/Theme.GPAPChecker" />
-        
+
+        <activity
+            android:name=".ImportActivity"
+            android:exported="false"
+            android:label="@string/import_title"
+            android:theme="@style/Theme.GPAPChecker" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

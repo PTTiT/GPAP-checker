@@ -57,20 +57,20 @@
 
 ### Implementation for User Story 1
 
-- [ ] T010 [P] [US1] Create activity_import.xml layout in app/src/main/res/layout/activity_import.xml
-- [ ] T011 [P] [US1] Add import screen strings to app/src/main/res/values/strings.xml
-- [ ] T012 [P] [US1] Create settings icon drawable in app/src/main/res/drawable/ic_settings.xml
-- [ ] T013 [P] [US1] Create ImportViewModel in app/src/main/java/com/geocomply/test/gpapchecker/viewmodel/ImportViewModel.kt
-- [ ] T014 [P] [US1] Create ImportViewModelFactory in app/src/main/java/com/geocomply/test/gpapchecker/viewmodel/ImportViewModelFactory.kt
-- [ ] T015 [US1] Implement ImportActivity with text input handling in app/src/main/java/com/geocomply/test/gpapchecker/ImportActivity.kt
-- [ ] T016 [US1] Add ImportActivity to AndroidManifest.xml
-- [ ] T017 [US1] Create main_menu.xml with settings action in app/src/main/res/menu/main_menu.xml
-- [ ] T018 [US1] Modify MainActivity (GPAP Checker screen) to add toolbar with settings button in app/src/main/java/com/geocomply/test/gpapchecker/MainActivity.kt
-- [ ] T019 [US1] Modify activity_main.xml (GPAP Checker screen) to include Toolbar in app/src/main/res/layout/activity_main.xml
-- [ ] T020 [US1] Add navigation from MainActivity (GPAP Checker screen) to ImportActivity via settings button in app/src/main/java/com/geocomply/test/gpapchecker/MainActivity.kt
-- [ ] T021 [US1] Implement TextWatcher for live validation in ImportActivity
-- [ ] T022 [US1] Wire up import button to perform import and navigate back to MainActivity (GPAP Checker screen)
-- [ ] T023 [US1] Implement validation summary display (valid/invalid counts) in ImportActivity
+- [X] T010 [P] [US1] Create activity_import.xml layout in app/src/main/res/layout/activity_import.xml
+- [X] T011 [P] [US1] Add import screen strings to app/src/main/res/values/strings.xml
+- [X] T012 [P] [US1] Create settings icon drawable in app/src/main/res/drawable/ic_settings.xml
+- [X] T013 [P] [US1] Create ImportViewModel in app/src/main/java/com/geocomply/test/gpapchecker/viewmodel/ImportViewModel.kt
+- [X] T014 [P] [US1] Create ImportViewModelFactory in app/src/main/java/com/geocomply/test/gpapchecker/viewmodel/ImportViewModelFactory.kt
+- [X] T015 [US1] Implement ImportActivity with text input handling in app/src/main/java/com/geocomply/test/gpapchecker/ImportActivity.kt
+- [X] T016 [US1] Add ImportActivity to AndroidManifest.xml
+- [X] T017 [US1] Create main_menu.xml with settings action in app/src/main/res/menu/main_menu.xml
+- [X] T018 [US1] Modify MainActivity (GPAP Checker screen) to add toolbar with settings button in app/src/main/java/com/geocomply/test/gpapchecker/MainActivity.kt
+- [X] T019 [US1] Modify activity_main.xml (GPAP Checker screen) to include Toolbar in app/src/main/res/layout/activity_main.xml
+- [X] T020 [US1] Add navigation from MainActivity (GPAP Checker screen) to ImportActivity via settings button in app/src/main/java/com/geocomply/test/gpapchecker/MainActivity.kt
+- [X] T021 [US1] Implement TextWatcher for live validation in ImportActivity
+- [X] T022 [US1] Wire up import button to perform import and navigate back to MainActivity (GPAP Checker screen)
+- [X] T023 [US1] Implement validation summary display (valid/invalid counts) in ImportActivity
 
 **Checkpoint**: User Story 1 complete - users can import packages via text input, validation works, packages persist
 

@@ -3,6 +3,7 @@ package com.geocomply.test.gpapchecker.repository
 import com.geocomply.test.gpapchecker.data.AppInfo
 import com.geocomply.test.gpapchecker.utils.AppChecker
 import com.geocomply.test.gpapchecker.utils.CsvExporter
+import com.geocomply.test.gpapchecker.utils.PackageListStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -19,22 +20,27 @@ import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
 class AppRepositoryTest {
-    
+
     private val testDispatcher = TestCoroutineDispatcher()
-    
+
     @Mock
     private lateinit var mockAppChecker: AppChecker
-    
+
     @Mock
     private lateinit var mockCsvExporter: CsvExporter
-    
+
+    @Mock
+    private lateinit var mockPackageListStorage: PackageListStorage
+
     private lateinit var repository: AppRepository
-    
+
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
         Dispatchers.setMain(testDispatcher)
-        repository = AppRepository(mockAppChecker, mockCsvExporter)
+        // Mock the storage to return false for hasCustomList() so it uses hardcoded list
+        `when`(mockPackageListStorage.hasCustomList()).thenReturn(false)
+        repository = AppRepository(mockAppChecker, mockCsvExporter, mockPackageListStorage)
     }
     
     @After
