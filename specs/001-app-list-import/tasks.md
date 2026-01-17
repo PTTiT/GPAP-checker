@@ -26,8 +26,8 @@
 
 **Purpose**: Project initialization and foundational utilities
 
-- [ ] T001 Add kotlinx-serialization dependency to app/build.gradle.kts (version 1.6.0)
-- [ ] T002 Add kotlinx-serialization plugin to app/build.gradle.kts plugins block
+- [X] T001 Add kotlinx-serialization dependency to app/build.gradle.kts (version 1.6.0)
+- [X] T002 Add kotlinx-serialization plugin to app/build.gradle.kts plugins block
 
 ---
 
@@ -37,13 +37,13 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T003 [P] Create ValidationResult data class in app/src/main/java/com/geocomply/test/gpapchecker/data/ValidationResult.kt
-- [ ] T004 [P] Create ImportState sealed class in app/src/main/java/com/geocomply/test/gpapchecker/data/ImportState.kt
-- [ ] T005 [P] Create ImportMode enum in app/src/main/java/com/geocomply/test/gpapchecker/data/ImportState.kt
-- [ ] T006 [P] Implement PackageListParser utility with validation regex, whitespace trimming, and deduplication in app/src/main/java/com/geocomply/test/gpapchecker/utils/PackageListParser.kt
-- [ ] T007 [P] Implement PackageListStorage utility in app/src/main/java/com/geocomply/test/gpapchecker/utils/PackageListStorage.kt
-- [ ] T008 Implement PackageListRepository in app/src/main/java/com/geocomply/test/gpapchecker/repository/PackageListRepository.kt
-- [ ] T009 Modify AppRepository to integrate PackageListStorage in app/src/main/java/com/geocomply/test/gpapchecker/repository/AppRepository.kt
+- [X] T003 [P] Create ValidationResult data class in app/src/main/java/com/geocomply/test/gpapchecker/data/ValidationResult.kt
+- [X] T004 [P] Create ImportState sealed class in app/src/main/java/com/geocomply/test/gpapchecker/data/ImportState.kt
+- [X] T005 [P] Create ImportMode enum in app/src/main/java/com/geocomply/test/gpapchecker/data/ImportState.kt
+- [X] T006 [P] Implement PackageListParser utility with validation regex, whitespace trimming, and deduplication in app/src/main/java/com/geocomply/test/gpapchecker/utils/PackageListParser.kt
+- [X] T007 [P] Implement PackageListStorage utility in app/src/main/java/com/geocomply/test/gpapchecker/utils/PackageListStorage.kt
+- [X] T008 Implement PackageListRepository in app/src/main/java/com/geocomply/test/gpapchecker/repository/PackageListRepository.kt
+- [X] T009 Modify AppRepository to integrate PackageListStorage in app/src/main/java/com/geocomply/test/gpapchecker/repository/AppRepository.kt
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
