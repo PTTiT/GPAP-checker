@@ -102,7 +102,7 @@ enum class ImportMode {
 
 5. **ImportSuccess**: Import completed successfully
    - Data: `packageCount` (Int), `mode` (ImportMode enum)
-   - Displayed: Success message, navigation back to main screen
+   - Displayed: Success message, navigation back to GPAP Checker screen
    - Transitions to: N/A (screen closes)
 
 6. **Error**: Import failed with error message
@@ -132,7 +132,7 @@ Error
   └→ Initial (user dismisses)
 
 ImportSuccess
-  └→ [Navigate to MainActivity]
+  └→ [Navigate to MainActivity (GPAP Checker screen)]
 ```
 
 **Relationships**:
@@ -261,7 +261,7 @@ fun savePackageList(packages: List<String>) {
    ImportState.ImportSuccess
          |
          v
-   [Navigate back to MainActivity]
+   [Navigate back to MainActivity (GPAP Checker screen)]
          |
          v
    AppRepository.getPackagesToCheck()

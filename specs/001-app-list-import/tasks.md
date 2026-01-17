@@ -53,7 +53,7 @@
 
 **Goal**: Allow users to quickly import package names via comma-separated text input, with immediate validation feedback and persistence across app launches.
 
-**Independent Test**: Enter "com.example.app1, com.example.app2" in the text input field, verify validation summary shows "2 valid, 0 invalid", tap import, verify main screen displays these two packages, relaunch app and verify packages persist.
+**Independent Test**: Enter "com.example.app1, com.example.app2" in the text input field, verify validation summary shows "2 valid, 0 invalid", tap import, verify GPAP Checker screen displays these two packages, relaunch app and verify packages persist.
 
 ### Implementation for User Story 1
 
@@ -65,11 +65,11 @@
 - [ ] T015 [US1] Implement ImportActivity with text input handling in app/src/main/java/com/geocomply/test/gpapchecker/ImportActivity.kt
 - [ ] T016 [US1] Add ImportActivity to AndroidManifest.xml
 - [ ] T017 [US1] Create main_menu.xml with settings action in app/src/main/res/menu/main_menu.xml
-- [ ] T018 [US1] Modify MainActivity to add toolbar with settings button in app/src/main/java/com/geocomply/test/gpapchecker/MainActivity.kt
-- [ ] T019 [US1] Modify activity_main.xml to include Toolbar in app/src/main/res/layout/activity_main.xml
-- [ ] T020 [US1] Add navigation from MainActivity to ImportActivity via settings button in app/src/main/java/com/geocomply/test/gpapchecker/MainActivity.kt
+- [ ] T018 [US1] Modify MainActivity (GPAP Checker screen) to add toolbar with settings button in app/src/main/java/com/geocomply/test/gpapchecker/MainActivity.kt
+- [ ] T019 [US1] Modify activity_main.xml (GPAP Checker screen) to include Toolbar in app/src/main/res/layout/activity_main.xml
+- [ ] T020 [US1] Add navigation from MainActivity (GPAP Checker screen) to ImportActivity via settings button in app/src/main/java/com/geocomply/test/gpapchecker/MainActivity.kt
 - [ ] T021 [US1] Implement TextWatcher for live validation in ImportActivity
-- [ ] T022 [US1] Wire up import button to perform import and navigate back to MainActivity
+- [ ] T022 [US1] Wire up import button to perform import and navigate back to MainActivity (GPAP Checker screen)
 - [ ] T023 [US1] Implement validation summary display (valid/invalid counts) in ImportActivity
 
 **Checkpoint**: User Story 1 complete - users can import packages via text input, validation works, packages persist
@@ -80,7 +80,7 @@
 
 **Goal**: Enable users to import larger lists from .txt files (comma-separated or line-separated), expanding utility beyond manual text entry.
 
-**Independent Test**: Create a .txt file with package names (e.g., "com.app1\ncom.app2\ncom.app3"), select it via file picker, verify all packages appear in validation summary, tap import, verify all packages appear in main screen.
+**Independent Test**: Create a .txt file with package names (e.g., "com.app1\ncom.app2\ncom.app3"), select it via file picker, verify all packages appear in validation summary, tap import, verify all packages appear in GPAP Checker screen.
 
 ### Implementation for User Story 2
 
@@ -100,7 +100,7 @@
 
 **Goal**: Provide flexibility to replace or append to existing app list based on user preference.
 
-**Independent Test**: Import an initial list (e.g., "com.app1, com.app2"), navigate back to import screen, import a new list (e.g., "com.app3, com.app4") with "Replace" option selected, verify main screen shows only com.app3 and com.app4. Then import "com.app5" with "Append" option and verify all 3 packages appear.
+**Independent Test**: Import an initial list (e.g., "com.app1, com.app2"), navigate back to import screen, import a new list (e.g., "com.app3, com.app4") with "Replace" option selected, verify GPAP Checker screen shows only com.app3 and com.app4. Then import "com.app5" with "Append" option and verify all 3 packages appear.
 
 ### Implementation for User Story 3
 
@@ -127,7 +127,7 @@
 - [ ] T042 Verify whitespace trimming works correctly in PackageListParser.parse()
 - [ ] T043 Verify duplicate removal (distinct()) works correctly in PackageListParser.parse()
 - [ ] T044 Verify package name validation regex rejects invalid formats in PackageListParser
-- [ ] T045 Update MainActivity to refresh app list when returning from ImportActivity
+- [ ] T045 Update MainActivity (GPAP Checker screen) to refresh app list when returning from ImportActivity
 - [ ] T046 [P] Add file size validation (max 1MB) in ImportViewModel.parseFileContent()
 - [ ] T047 [P] Add logging for import operations in ImportViewModel
 - [ ] T048 Verify first launch detection (hardcoded list shown) in AppRepository

@@ -66,12 +66,12 @@ app/src/main/java/com/geocomply/test/gpapchecker/
 ├── data/
 │   ├── ImportState.kt                       # NEW: Sealed class for import UI state
 │   └── ValidationResult.kt                  # NEW: Validation result with counts
-└── MainActivity.kt                          # MODIFIED: Add settings button & navigation
+└── MainActivity.kt                          # MODIFIED: Add settings button & navigation (GPAP Checker screen)
 
 app/src/main/res/
 ├── layout/
 │   ├── activity_import.xml                  # NEW: Import screen layout
-│   └── activity_main.xml                    # MODIFIED: Add settings button
+│   └── activity_main.xml                    # MODIFIED: Add settings button (GPAP Checker screen)
 ├── values/
 │   └── strings.xml                          # MODIFIED: Add import screen strings
 └── drawable/

@@ -701,7 +701,7 @@ class ImportActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         ).show()
 
-        // Navigate back to MainActivity
+        // Navigate back to MainActivity (GPAP Checker screen)
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         startActivity(intent)
@@ -727,7 +727,7 @@ class ImportActivity : AppCompatActivity() {
 
 ---
 
-#### Step 3.3: Modify MainActivity to Add Settings Button
+#### Step 3.3: Modify MainActivity (GPAP Checker Screen) to Add Settings Button
 
 **File**: `app/src/main/res/layout/activity_main.xml` (MODIFY)
 
@@ -883,13 +883,13 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 #### Step 5.2: Manual Test Cases
 
 1. **First Launch**:
-   - Launch app → Verify 213 hardcoded packages shown in main screen
+   - Launch app → Verify 213 hardcoded packages shown in GPAP Checker screen
    - Tap settings button → Navigate to import screen
 
 2. **Text Input Import**:
    - Enter: `com.test.app1, com.test.app2`
    - Verify: "2 valid, 0 invalid" summary shown
-   - Tap Import → Navigate back to main screen
+   - Tap Import → Navigate back to GPAP Checker screen
    - Verify: Only 2 packages shown (hardcoded list replaced)
 
 3. **File Import**:
@@ -904,7 +904,7 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
    - Return to import screen
    - Select "Append to existing list" radio button
    - Import com.app2
-   - Return to main screen → Verify both packages shown
+   - Return to GPAP Checker screen → Verify both packages shown
 
 5. **Validation**:
    - Enter invalid packages: `INVALID, com.valid.app`
@@ -938,7 +938,7 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 ### Issue: Hardcoded list still showing after import
 - Check: `AppRepository.getPackagesToCheck()` reads from storage
 - Check: `hasCustomList()` returns true after import
-- Check: MainActivity refresh logic after navigation back
+- Check: MainActivity (GPAP Checker screen) refresh logic after navigation back
 
 ---
 
@@ -973,7 +973,7 @@ Before marking feature complete, verify:
 - [ ] Lint passes (`./gradlew lint`)
 - [ ] Manual testing completed (all 6 scenarios above)
 - [ ] Performance benchmarks pass (SC-002, SC-003)
-- [ ] Settings button visible on MainActivity toolbar
+- [ ] Settings button visible on MainActivity (GPAP Checker screen) toolbar
 - [ ] First launch shows hardcoded list
 - [ ] Import replaces/appends correctly based on mode
 - [ ] Validation feedback shows inline (<2 seconds)
